@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+</head>
+
+<body>
+    <button id="show-form-btn">+ Add expenses</button>
+    <div id="form-container" class="hidden">
+        <form id="expense-form">
+            <select name="category" id="category-select">
+                <option value="Grocery">Grocery</option>
+                <option value="Transportation">Transportation</option>
+                <option value="Cosmetics/Household Chemicals">Cosmetics/Household Chemicals</option>
+                <option value="Subscriptions/Operator Fees">Subscriptions/Operator Fees</option>
+                <option value="Loans/Mortgages">Loans/Mortgages</option>
+                <option value="Entertainment/Travel">Entertainment/Travel</option>
+                <option value="Gifts/Donations">Gifts/Donations</option>
+                <option value="Clothing/Shoes">Clothing/Shoes</option>
+                <option value="Renovation/Interior">Renovation/Interior</option>
+                <option value="Other">Other</option>
+            </select>
+            <input type="number" name="amount" placeholder="Amount" required />
+            <input type="text" name="comments" placeholder="Comment" />
+            <input type="date" name="date" />
+
+            <button type="submit">Add</button>
+        </form>
+    </div>
+    <ul id="expense-list"></ul>
+
+
+    <script src="./src/models/Expence.js"></script>
+    <script src="./src/utils/storage.js"></script>
+    <script src="./src/models/ExpenseManeger.js"></script>
+    <script src="./src/ui/ExpenseList.js"></script>
+    <script src="./src/ui/ExpenseForm.js"></script>
+    <!-- <script src="./src/ui/summary.js"></script> -->
+    <script src="./src/main.js"></script>
+</body>
+
+</html>
