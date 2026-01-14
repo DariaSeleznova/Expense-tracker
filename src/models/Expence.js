@@ -15,19 +15,21 @@
 // 👉 НЕ работает с DOM
 
 class Expense {
-    constructor(category, amount, comments = "", date = new Date()) {
+    constructor(category, amount, comments, date) {
         this.category = category
+        this.amount = Math.round(Number(amount) * 100) / 100
         this.comments = comments
-        this.amount = Number(amount)
-        this.date = date instanceof Date ? date : new Date(date)
+        this.date = date
         this.id = crypto.randomUUID()
     }
+
     getFormattedDate() {
-        const day = this.date.getDate().toString().padStart(2, "0")
-        const month = (this.date.getMonth() + 1).toString().padStart(2, "0")
-        const year = this.date.getFullYear()
-        return `${day}.${month}.${year}`
+        const d = this.date
+        return `${String(d.getDate()).padStart(2, "0")}.${String(
+            d.getMonth() + 1
+        ).padStart(2, "0")}.${d.getFullYear()}`
     }
+
 
 
 }

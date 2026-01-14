@@ -6,13 +6,18 @@
 
 // 👉 Это очень любят — отдельный слой для хранения данных.
 
-class Storage {
-    static save(key, data) {
+// Создаём глобальный объект Storage
+const Storage = {
+    save: function (key, data) {
         localStorage.setItem(key, JSON.stringify(data))
-    }
+    },
 
-    static load(key) {
-        const data = localStorage.getItem(key)
-        return data ? JSON.parse(data) : []
+    load: function (key) {
+        const json = localStorage.getItem(key)
+        return json ? JSON.parse(json) : []
+    },
+
+    clear: function (key) {
+        localStorage.removeItem(key)
     }
 }

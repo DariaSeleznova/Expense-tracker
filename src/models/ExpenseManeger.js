@@ -32,8 +32,9 @@ class ExpenseManager {
 
         const expense = new Expense(category, amount, comments, date)
         this.expenses.push(expense)
-        this.save()
 
+        this.save()
+        console.log(expense)
         return expense
     }
     removeExpense(id) {
@@ -51,6 +52,12 @@ class ExpenseManager {
 
     save() {
         Storage.save("expenses", this.expenses)
+    }
+    getExpensesByMonth(year, month) {
+        return this.expenses.filter(e =>
+            e.date.getFullYear() === year &&
+            e.date.getMonth() === month
+        )
     }
 
 }
