@@ -1,14 +1,3 @@
-// Тут:
-
-// создаётся ExpenseManager
-
-// инициализируются UI-компоненты
-
-// связывается логика и интерфейс
-
-// 📌 Это единственное место, где всё “сходится”.
-
-
 const balanceManager = new BalanceManager()
 const manager = new ExpenseManager(balanceManager)
 const expenseList = new ExpenseList(manager, expense => expenseForm.openForEdit(expense))
@@ -24,14 +13,12 @@ const categoryFilter = document.querySelector("#category-filter")
 const weekBtn = document.querySelector("#weekBtn")
 const sortSelect = document.querySelector("#sort-select")
 
-// --- первый рендер ---
 function renderExpenses(expenses) {
     expenseList.render(expenses)
     totalElement.textContent = getTotal(expenses)
     renderCategoryPercent(expenses)
 }
 
-// --- фильтр месяц + категория ---
 function applyMonthCategoryFilter() {
     const year = Number(yearSelect.value)
     const month = Number(monthSelect.value)
@@ -48,11 +35,9 @@ function applyMonthCategoryFilter() {
     }
 }
 
-// --- кнопка "эта неделя" ---
 weekBtn.addEventListener("click", () => {
     Filters.mode = "week"
 
-    // сброс фильтров
     monthSelect.value = ""
     yearSelect.value = new Date().getFullYear()
     categoryFilter.value = "all"
@@ -62,7 +47,6 @@ weekBtn.addEventListener("click", () => {
     renderExpenses(weekExpenses)
 })
 
-// --- слушатели для фильтров ---
 monthSelect.addEventListener("change", () => {
     Filters.mode = "month"
     applyMonthCategoryFilter()
@@ -76,7 +60,6 @@ categoryFilter.addEventListener("change", () => {
     if (Filters.mode === "month") applyMonthCategoryFilter()
 })
 
-// --- сортировка ---
 sortSelect.addEventListener("change", () => {
     let expensesToRender = [...manager.expenses]
 
@@ -103,7 +86,6 @@ sortSelect.addEventListener("change", () => {
     renderExpenses(expensesToRender)
 })
 
-// --- первый рендер при загрузке ---
 const initialWeek = Filters.week()
 renderExpenses(Filters.apply(manager.expenses, initialWeek))
 

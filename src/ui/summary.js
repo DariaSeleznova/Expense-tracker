@@ -1,11 +1,3 @@
-// Summary.js
-
-// общая сумма
-
-// сумма по категориям
-
-// обновляется при изменениях
-
 function getTotal(expenses) {
     if (!Array.isArray(expenses)) return 0
     return expenses.reduce((sum, e) => sum + e.amount, 0)

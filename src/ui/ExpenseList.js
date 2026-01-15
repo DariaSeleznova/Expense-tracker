@@ -1,16 +1,8 @@
-// ExpenseList.js
-
-// отображает список расходов
-
-// обновляет DOM
-
-// кнопка “удалить”
-
 class ExpenseList {
     constructor(manager, onEditExpense) {
         this.manager = manager
         this.listElement = document.querySelector("#expense-list")
-        this.onEditExpense = onEditExpense // <--- передаем функцию редактирования
+        this.onEditExpense = onEditExpense
     }
 
     renderItem(expense) {
@@ -43,7 +35,7 @@ class ExpenseList {
             if (event.target.classList.contains("edit-btn")) {
                 const expense = this.manager.expenses.find(e => e.id === id)
                 if (expense && this.onEditExpense) {
-                    this.onEditExpense(expense) // ✅ теперь через this
+                    this.onEditExpense(expense)
                 }
             }
         })

@@ -1,11 +1,3 @@
-// ExpenseForm.js
-
-// считывает данные из формы
-
-// валидирует
-
-// передаёт данные в ExpenseManager
-
 class ExpenseForm {
     constructor(manager, listUI) {
         this.manager = manager
@@ -39,11 +31,9 @@ class ExpenseForm {
 
             const editId = this.form.dataset.editId
             if (editId) {
-                // редактирование
                 this.manager.updateExpense(editId, { category, amount, comments, date })
                 delete this.form.dataset.editId
             } else {
-                // добавление новой
                 this.manager.addExpense({ category, amount, comments, date })
             }
 
@@ -56,11 +46,11 @@ class ExpenseForm {
 
     }
     openForEdit(expense) {
-        this.form.dataset.editId = expense.id // сохраняем id для обновления
+        this.form.dataset.editId = expense.id
         this.form.querySelector('select[name="category"]').value = expense.category
         this.form.querySelector('input[name="amount"]').value = expense.amount
         this.form.querySelector('input[name="comments"]').value = expense.comments
-        this.datePicker.setDate(expense.date, true) // выбираем дату в календаре
+        this.datePicker.setDate(expense.date, true)
         this.container.classList.remove("hidden")
     }
 

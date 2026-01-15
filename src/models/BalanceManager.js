@@ -1,11 +1,9 @@
 class BalanceManager {
     constructor() {
         const data = Storage.load("balance")
-
         this.initial = data?.initial ?? 0
         this.topUps = data?.topUps ?? []
         console.log("Balance loaded:", data)
-        // ← ВАЖНО
     }
 
     addTopUp(amount) {
