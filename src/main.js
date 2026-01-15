@@ -19,6 +19,10 @@ const currencySelect = document.querySelector("#currency-select")
 const topUpInput = document.querySelector("#topup-input")
 const topUpBtn = document.querySelector("#topup-btn")
 const langSelect = document.querySelector("#language-select")
+const themeSelect = document.querySelector("#theme-select");
+
+Theme.init();
+themeSelect.value = Theme.current;
 
 Language.init()
 Language.apply()
@@ -27,6 +31,10 @@ Currency.init()
 currencySelect.value = Currency.current
 
 langSelect.value = Language.current
+
+themeSelect.addEventListener("change", () => {
+    Theme.set(themeSelect.value);
+});
 
 langSelect.addEventListener("change", () => {
     Language.set(langSelect.value)

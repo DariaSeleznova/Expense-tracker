@@ -1,5 +1,5 @@
 const Language = {
-    current: "pl",
+    current: "en",
 
     translations: {
         pl: {
@@ -126,6 +126,7 @@ const Language = {
 
     apply() {
         document.querySelectorAll("[data-language]").forEach(el => {
+            if (el.children.length > 0) return;
             const key = el.dataset.language
             el.textContent = this.t(key)
         })

@@ -12,6 +12,12 @@
 </head>
 
 <body>
+    <select id="theme-select">
+        <option value="light">☀️ Light</option>
+        <option value="dark">🌙 Dark</option>
+        <option value="rainbow">🌈 Rainbow</option>
+    </select>
+
     <select name="language" id="language-select">
         <option value="pl">PL</option>
         <option value="en">EN</option>
@@ -25,14 +31,17 @@
     </select>
 
     <div id="balance">
-        <p data-language="balance"><span id="balance-amount"></span></p>
-
+        <p>
+            <spandata-language="balance"></span>
+                <span id="balance-amount"></span>
+        </p>
         <input type="number" id="topup-input" />
         <button id="topup-btn" data-language="topup"></button>
     </div>
 
     <div id="total-expenses">
-        <span data-language="total"></span> <span id="total-amount">0</span>
+        <span data-language="total">
+        </span> <span id="total-amount">0</span>
         <button id="show-form-btn" data-language="addExpense"></button>
 
     </div>
@@ -62,20 +71,19 @@
     <ul id="expense-list"></ul>
     <button id="weekBtn" data-language="week"></button>
     <form>
-
-        <select id="month-select" data-language="month">
-            <option value="0" data-language="january"></option>
-            <option value="1" data-language="february"></option>
-            <option value="2" data-language="march"></option>
-            <option value="3" data-language="april"></option>
-            <option value="4" data-language="may"></option>
-            <option value="5" data-language="june"></option>
-            <option value="6" data-language="july"></option>
-            <option value="7" data-language="august"></option>
-            <option value="8" data-language="september"></option>
-            <option value="9" data-language="october"></option>
-            <option value="10" data-language="november"></option>
-            <option value="11" data-language="december"></option>
+        <select id="month-select">
+            <option value="0" data-language="january">January</option>
+            <option value="1" data-language="february">February</option>
+            <option value="2" data-language="march">March</option>
+            <option value="3" data-language="april">April</option>
+            <option value="4" data-language="may">May</option>
+            <option value="5" data-language="june">June</option>
+            <option value="6" data-language="july">July</option>
+            <option value="7" data-language="august">August</option>
+            <option value="8" data-language="september">September</option>
+            <option value="9" data-language="october">October</option>
+            <option value="10" data-language="november">November</option>
+            <option value="11" data-language="december">December</option>
         </select>
         <select id="year-select">
             <option value="2026">2026</option>
@@ -115,6 +123,7 @@
     <script src="./src/ui/ExpenseList.js"></script>
     <script src="./src/ui/filters.js"></script>
     <script src="./src/settings/language.js"></script>
+    <script src="./src/settings/theme.js"></script>
     <script src="./src/main.js"></script>
 </body>
 

@@ -1,3 +1,67 @@
+:root {
+    --bg: #ffffff;
+    --text: #1f2937;
+    --card: #f3f4f6;
+    --accent: #6366f1;
+    --border: #e5e7eb;
+}
+
+body.theme-dark {
+    --bg: #111827;
+    --text: #e5e7eb;
+    --card: #1f2937;
+    --accent: #818cf8;
+    --border: #374151;
+}
+
+body.theme-rainbow {
+    --bg: linear-gradient(135deg, #fdf2f8, #ecfeff);
+    --text: #1f2937;
+    --card: rgba(255, 255, 255, 0.7);
+    --accent: #ec4899;
+    --border: #fbcfe8;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+}
+
+.card,
+#balance,
+#total-expenses {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px;
+}
+
+button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+}
+
+body {
+    transition:
+        background 0.4s ease,
+        color 0.3s ease;
+}
+
+.card,
+button {
+    transition:
+        background 0.3s ease,
+        transform 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+}
+
+
 .hidden {
     display: none;
 }
