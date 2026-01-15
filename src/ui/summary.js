@@ -29,7 +29,7 @@ function renderCategoryPercent(expenses, selector = "#category-percent") {
 
     for (const cat in percents) {
         const p = document.createElement("p")
-        p.textContent = `${cat}: ${percents[cat]}%`
+        p.textContent = `${Language.t(cat)}: ${percents[cat]}%`
         container.appendChild(p)
     }
 }

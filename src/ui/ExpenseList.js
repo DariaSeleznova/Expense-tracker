@@ -11,7 +11,7 @@ class ExpenseList {
 
         li.innerHTML = `
         <div class="expense">
-            <span>${expense.category}</span>
+            <span>${Language.t(expense.category)}</span>
             <span> ${expense.amount.toFixed(2)} ${Currency.getSymbol()}</span>
             <button class="edit-btn">✎</button>
             <button class="delete-btn">✖</button><br/>

@@ -10,7 +10,9 @@ const Language = {
             balance: "Saldo",
             topup: "Doładuj",
             amount: "Kwota",
+            expenses: "Wydatki",
             addExpense: "Dodać wydatek",
+            recent: "Ostatni",
             january: "Styczeń",
             february: "Luty",
             march: "Marzec",
@@ -35,7 +37,8 @@ const Language = {
             renovation: "Renowacja/Wnętrza",
             other: "Inny",
             sorting: "Brak sortowania",
-            amount: "Kwota"
+            amount: "Kwota",
+            topExpenses: "Top wytrat"
         },
         en: {
             week: "This week",
@@ -45,7 +48,9 @@ const Language = {
             balance: "Balance",
             topup: "Top up",
             amount: "Amount",
+            expenses: "Expenses",
             addExpense: "Add expense",
+            recent: "Recent",
             january: "January",
             february: "February",
             march: "March",
@@ -70,7 +75,8 @@ const Language = {
             renovation: "Renovation/Interior",
             other: "Other",
             sorting: "No sorting",
-            amount: "Amount"
+            amount: "Amount",
+            topExpenses: "Top Expenses"
         },
         uk: {
             week: "Цей тиждень",
@@ -80,7 +86,9 @@ const Language = {
             balance: "Баланс",
             topup: "Поповнити",
             amount: "Сума",
+            expenses: "Витрати",
             addExpense: "Додати витрату",
+            recent: "Недавні",
             january: "Січень",
             february: "Лютий",
             march: "Березень",
@@ -105,7 +113,8 @@ const Language = {
             renovation: "Ремонт/Інтер'єр",
             other: "Інше",
             sorting: "Без сортування",
-            amount: "Сума"
+            amount: "Сума",
+            topExpenses: "Топ витрат"
         }
     },
 

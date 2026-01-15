@@ -2,13 +2,17 @@ let currentExpenses = []
 
 const balanceManager = new BalanceManager()
 const manager = new ExpenseManager(balanceManager)
+const balanceView = new BalanceView(balanceManager, manager)
 
 const expenseList = new ExpenseList(manager, expense => expenseForm.openForEdit(expense))
 const expenseForm = new ExpenseForm(manager, expenseList)
 
+balanceView.initEvents()
+balanceView.render()
 
 expenseList.initEvents()
 expenseForm.initEvents()
+
 const totalElement = document.querySelector("#total-amount")
 const monthSelect = document.querySelector("#month-select")
 const yearSelect = document.querySelector("#year-select")
@@ -38,26 +42,17 @@ themeSelect.addEventListener("change", () => {
 
 langSelect.addEventListener("change", () => {
     Language.set(langSelect.value)
+    renderExpenses(manager.expenses, initialWeek)
+    renderCategoryPercent(expenses)
 })
 
 currencySelect.addEventListener("change", () => {
     Currency.set(currencySelect.value)
 
-    renderExpenses(currentExpenses)
+    renderExpenses(manager.expenses, initialWeek)
     renderBalance(balanceManager, manager.expenses)
 })
 
-topUpBtn.addEventListener("click", () => {
-    const amount = Number(topUpInput.value)
-
-    if (!amount || amount <= 0) return
-
-    balanceManager.addTopUp(amount)
-
-    renderBalance(balanceManager, manager.expenses)
-
-    topUpInput.value = ""
-})
 
 weekBtn.addEventListener("click", () => {
     Filters.mode = "week"

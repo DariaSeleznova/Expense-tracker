@@ -21,6 +21,7 @@ class ExpenseManager {
         this.expenses.push(expense)
 
         this.save()
+        renderExpenses(manager.expenses)
         renderBalance(balanceManager, manager.expenses)
         return expense
     }
@@ -34,6 +35,7 @@ class ExpenseManager {
         }
 
         this.save()
+        renderExpenses(manager.expenses)
         renderBalance(balanceManager, manager.expenses)
         return true
     }
@@ -63,6 +65,7 @@ class ExpenseManager {
         expense.date = date
 
         this.save()
+        renderExpenses(manager.expenses)
         renderBalance(balanceManager, manager.expenses)
         return expense
     }
