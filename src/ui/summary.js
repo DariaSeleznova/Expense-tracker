@@ -47,7 +47,7 @@ function getCurrentBalance(balanceManager, expenses) {
 function renderBalance(balanceManager, expenses) {
     const el = document.querySelector("#balance-amount")
     if (!el) return
-
-    el.textContent = getCurrentBalance(balanceManager, expenses)
+    const currentBalace = getCurrentBalance(balanceManager, expenses)
+    el.textContent = `${currentBalace.toFixed(2)} ${Currency.getSymbol()}`
 }
 

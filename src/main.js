@@ -1,39 +1,55 @@
+let currentExpenses = []
+
 const balanceManager = new BalanceManager()
 const manager = new ExpenseManager(balanceManager)
+
 const expenseList = new ExpenseList(manager, expense => expenseForm.openForEdit(expense))
 const expenseForm = new ExpenseForm(manager, expenseList)
 
+
 expenseList.initEvents()
 expenseForm.initEvents()
-
 const totalElement = document.querySelector("#total-amount")
 const monthSelect = document.querySelector("#month-select")
 const yearSelect = document.querySelector("#year-select")
 const categoryFilter = document.querySelector("#category-filter")
 const weekBtn = document.querySelector("#weekBtn")
 const sortSelect = document.querySelector("#sort-select")
+const currencySelect = document.querySelector("#currency-select")
+const topUpInput = document.querySelector("#topup-input")
+const topUpBtn = document.querySelector("#topup-btn")
+const langSelect = document.querySelector("#language-select")
 
-function renderExpenses(expenses) {
-    expenseList.render(expenses)
-    totalElement.textContent = getTotal(expenses)
-    renderCategoryPercent(expenses)
-}
+Language.init()
+Language.apply()
 
-function applyMonthCategoryFilter() {
-    const year = Number(yearSelect.value)
-    const month = Number(monthSelect.value)
-    const category = categoryFilter.value
+Currency.init()
+currencySelect.value = Currency.current
 
-    if (!isNaN(year) && !isNaN(month)) {
-        let filtered = manager.getExpensesByMonth(year, month)
+langSelect.value = Language.current
 
-        if (category !== "all") {
-            filtered = filtered.filter(e => e.category === category)
-        }
+langSelect.addEventListener("change", () => {
+    Language.set(langSelect.value)
+})
 
-        renderExpenses(filtered)
-    }
-}
+currencySelect.addEventListener("change", () => {
+    Currency.set(currencySelect.value)
+
+    renderExpenses(currentExpenses)
+    renderBalance(balanceManager, manager.expenses)
+})
+
+topUpBtn.addEventListener("click", () => {
+    const amount = Number(topUpInput.value)
+
+    if (!amount || amount <= 0) return
+
+    balanceManager.addTopUp(amount)
+
+    renderBalance(balanceManager, manager.expenses)
+
+    topUpInput.value = ""
+})
 
 weekBtn.addEventListener("click", () => {
     Filters.mode = "week"
@@ -87,30 +103,42 @@ sortSelect.addEventListener("change", () => {
 })
 
 const initialWeek = Filters.week()
+const weekExpenses = Filters.apply(manager.expenses, initialWeek)
+
 renderExpenses(Filters.apply(manager.expenses, initialWeek))
+renderBalance(balanceManager, manager.expenses)
+
+
+function renderExpenses(expenses) {
+    currentExpenses = expenses
+
+    expenseList.render(expenses)
+
+    const total = getTotal(expenses)
+    totalElement.textContent = `${total.toFixed(2)} ${Currency.getSymbol()}`
+
+    renderCategoryPercent(expenses)
+}
+
+function applyMonthCategoryFilter() {
+    const year = Number(yearSelect.value)
+    const month = Number(monthSelect.value)
+    const category = categoryFilter.value
+
+    if (!isNaN(year) && !isNaN(month)) {
+        let filtered = manager.getExpensesByMonth(year, month)
+
+        if (category !== "all") {
+            filtered = filtered.filter(e => e.category === category)
+        }
+
+        renderExpenses(filtered)
+    }
+}
 
 function renderBalance(balanceManager, expenses) {
     const el = document.querySelector("#balance-amount")
     if (!el) return
 
-    el.textContent = getCurrentBalance(balanceManager, expenses).toFixed(2)
+    el.textContent = `${getCurrentBalance(balanceManager, expenses).toFixed(2)} ${Currency.getSymbol()}`
 }
-renderBalance(balanceManager, manager.expenses)
-
-const topUpInput = document.querySelector("#topup-input")
-const topUpBtn = document.querySelector("#topup-btn")
-
-topUpBtn.addEventListener("click", () => {
-    const amount = Number(topUpInput.value)
-
-    if (!amount || amount <= 0) return
-
-    balanceManager.addTopUp(amount)
-
-    renderBalance(balanceManager, manager.expenses)
-
-    topUpInput.value = ""
-
-
-})
-
