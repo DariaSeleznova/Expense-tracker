@@ -12,6 +12,16 @@
 </head>
 
 <body>
+    <div id="balance">
+        <p>Баланс: <span id="balance-amount">0</span></p>
+
+        <input type="number" id="topup-input" placeholder="Пополнить баланс" />
+        <button id="topup-btn">Пополнить</button>
+    </div>
+
+
+
+
     <div id="total-expenses">
         Общая сумма: <span id="total-amount">0</span> zł
         <button id="show-form-btn">+ Add expenses</button>
@@ -64,15 +74,26 @@
             <option value="2027">2027</option>
             <option value="2028">2028</option>
         </select>
-
+        <select name="category" id="category-filter">
+            <option value="all">All</option>
+            <option value="Grocery">Grocery</option>
+            <option value="Transportation">Transportation</option>
+            <option value="Cosmetics/Household Chemicals">Cosmetics/Household Chemicals</option>
+            <option value="Subscriptions/Operator Fees">Subscriptions/Operator Fees</option>
+            <option value="Loans/Mortgages">Loans/Mortgages</option>
+            <option value="Entertainment/Travel">Entertainment/Travel</option>
+            <option value="Gifts/Donations">Gifts/Donations</option>
+            <option value="Clothing/Shoes">Clothing/Shoes</option>
+            <option value="Renovation/Interior">Renovation/Interior</option>
+            <option value="Other">Other</option>
+        </select>
     </form>
     <select id="sort-select">
         <option value="none">Без сортировки</option>
         <option value="amount-asc">Сумма ↑</option>
         <option value="amount-desc">Сумма ↓</option>
     </select>
-    <input type="text" id="start-date" placeholder="От" />
-    <input type="text" id="end-date" placeholder="До" />
+
 
 
 
@@ -83,8 +104,10 @@
     <script src="./src/ui/summary.js"></script>
     <script src="./src/models/Expence.js"></script>
     <script src="./src/models/ExpenseManeger.js"></script>
-    <script src="./src/ui/ExpenseList.js"></script>
+    <script src="./src/models/BalanceManager.js"></script>
     <script src="./src/ui/ExpenseForm.js"></script>
+    <script src="./src/ui/ExpenseList.js"></script>
+
     <script src="./src/ui/filters.js"></script>
     <script src="./src/main.js"></script>
 </body>

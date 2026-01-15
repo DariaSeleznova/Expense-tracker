@@ -31,25 +31,37 @@ class ExpenseForm {
 
         this.form.addEventListener("submit", (event) => {
             event.preventDefault()
-
             const formData = new FormData(this.form)
+            const category = formData.get("category")
+            const amount = Number(formData.get("amount"))
+            const comments = formData.get("comments")
+            const date = this.datePicker.selectedDates[0] || new Date()
 
-            const expense = this.manager.addExpense({
-                category: formData.get("category"),
-                amount: Number(formData.get("amount")),
-                comments: formData.get("comments"),
-                date:
-                    this.datePicker.selectedDates.length > 0
-                        ? this.datePicker.selectedDates[0]
-                        : new Date()
-            })
-
-            if (expense) {
-                applyFiltersAndSort()
-                this.form.reset()
-                this.container.classList.add("hidden")
+            const editId = this.form.dataset.editId
+            if (editId) {
+                // редактирование
+                this.manager.updateExpense(editId, { category, amount, comments, date })
+                delete this.form.dataset.editId
+            } else {
+                // добавление новой
+                this.manager.addExpense({ category, amount, comments, date })
             }
 
+            this.listUI.render(this.manager.expenses)
+            renderTotal(this.manager.expenses)
+            renderCategoryPercent(this.manager.expenses)
+            this.form.reset()
+            this.container.classList.add("hidden")
         })
+
     }
+    openForEdit(expense) {
+        this.form.dataset.editId = expense.id // сохраняем id для обновления
+        this.form.querySelector('select[name="category"]').value = expense.category
+        this.form.querySelector('input[name="amount"]').value = expense.amount
+        this.form.querySelector('input[name="comments"]').value = expense.comments
+        this.datePicker.setDate(expense.date, true) // выбираем дату в календаре
+        this.container.classList.remove("hidden")
+    }
+
 }

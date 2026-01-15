@@ -14,6 +14,7 @@
 
 class ExpenseManager {
     constructor() {
+        this.balanceManager = balanceManager
         this.expenses = []
         const data = Storage.load("expenses")
         this.expenses = data.map(item =>
@@ -34,7 +35,7 @@ class ExpenseManager {
         this.expenses.push(expense)
 
         this.save()
-        console.log(expense)
+        renderBalance(balanceManager, manager.expenses)
         return expense
     }
     removeExpense(id) {
@@ -47,7 +48,13 @@ class ExpenseManager {
         }
 
         this.save()
+        renderBalance(balanceManager, manager.expenses)
         return true
+    }
+    getTotalAllTime() {
+        return this.expenses.reduce((total, expense) => {
+            return total + expense.amount
+        }, 0)
     }
 
     save() {
@@ -58,6 +65,20 @@ class ExpenseManager {
             e.date.getFullYear() === year &&
             e.date.getMonth() === month
         )
+    }
+
+    updateExpense(id, { category, amount, comments, date }) {
+        const expense = this.expenses.find(e => e.id === id)
+        if (!expense) return null
+
+        expense.category = category
+        expense.amount = amount
+        expense.comments = comments
+        expense.date = date
+
+        this.save()
+        renderBalance(balanceManager, manager.expenses)
+        return expense
     }
 
 }

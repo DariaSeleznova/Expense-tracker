@@ -41,5 +41,21 @@ function renderCategoryPercent(expenses, selector = "#category-percent") {
         container.appendChild(p)
     }
 }
+function renderTotal() {
+    totalElement.textContent = manager.getTotalAllTime()
+}
 
+function getCurrentBalance(balanceManager, expenses) {
+    return (
+        balanceManager.initial +
+        balanceManager.getTotalTopUps() -
+        getTotal(expenses)
+    )
+}
+function renderBalance(balanceManager, expenses) {
+    const el = document.querySelector("#balance-amount")
+    if (!el) return
+
+    el.textContent = getCurrentBalance(balanceManager, expenses)
+}
 
