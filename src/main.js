@@ -4,7 +4,7 @@ const balanceManager = new BalanceManager()
 const manager = new ExpenseManager(balanceManager)
 const balanceView = new BalanceView(balanceManager, manager)
 
-const expenseList = new ExpenseList(manager, expense => expenseForm.openForEdit(expense))
+const expenseList = new ExpenseList(manager, (expense) => expenseForm.openForEdit(expense))
 const expenseForm = new ExpenseForm(manager, expenseList)
 
 balanceView.initEvents()
@@ -12,6 +12,8 @@ balanceView.render()
 
 expenseList.initEvents()
 expenseForm.initEvents()
+console.log("BalanceView initEvents")
+
 
 const totalElement = document.querySelector("#total-amount")
 const monthSelect = document.querySelector("#month-select")
@@ -20,8 +22,8 @@ const categoryFilter = document.querySelector("#category-filter")
 const weekBtn = document.querySelector("#weekBtn")
 const sortSelect = document.querySelector("#sort-select")
 const currencySelect = document.querySelector("#currency-select")
-const topUpInput = document.querySelector("#topup-input")
-const topUpBtn = document.querySelector("#topup-btn")
+// const topUpInput = document.querySelector("#topup-input")
+// const topUpBtn = document.querySelector("#topup-btn")
 const langSelect = document.querySelector("#language-select")
 const themeSelect = document.querySelector("#theme-select");
 

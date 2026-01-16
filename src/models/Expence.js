@@ -19,7 +19,7 @@ class Expense {
         this.category = category
         this.amount = Math.round(Number(amount) * 100) / 100
         this.comments = comments
-        this.date = date
+        this.date = date instanceof Date ? date : new Date(date)
         this.id = crypto.randomUUID()
     }
 

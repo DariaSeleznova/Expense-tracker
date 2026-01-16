@@ -6,39 +6,58 @@ class ExpenseList {
     }
 
     renderItem(expense) {
-        const li = document.createElement("li")
-        li.dataset.id = expense.id
+        const div = document.createElement("div")
+        div.className = "transaction-card"
+        div.dataset.id = expense.id
 
-        li.innerHTML = `
-        <div class="expense">
-            <span>${Language.t(expense.category)}</span>
-            <span> ${expense.amount.toFixed(2)} ${Currency.getSymbol()}</span>
-            <button class="edit-btn">✎</button>
-            <button class="delete-btn">✖</button><br/>
-            <p>(${expense.comments}) ${expense.getFormattedDate()}</p>
+        div.innerHTML = `
+        <div class="transaction-main">
+            <div class="transaction-info">
+                <div class="expense-category">
+                   <span class="category-dot"  style="background: ${CategoryColors.get(expense.category)}"></span>
+                   <span>${Language.t(expense.category)}</span>
+                </div>
+
+                <div class="transaction-date">${expense.getFormattedDate()}</div>
+            </div>
+
+            <div class="transaction-actions">
+                <span class="transaction-amount">
+                    ${expense.amount.toFixed(2)} ${Currency.getSymbol()}
+                </span>
+                <button class="edit-btn">✎</button>
+                <button class="delete-btn">✕</button>
+            </div>
         </div>
-        `
-        return li
+
+        ${expense.comments ? `
+            <div class="transaction-comment">
+                ${expense.comments}
+            </div>
+        ` : ""}
+    `
+
+        return div
     }
 
-    initEvents() {
-        this.listElement.addEventListener("click", (event) => {
-            const li = event.target.closest("li")
-            if (!li) return
-            const id = li.dataset.id
 
-            if (event.target.classList.contains("delete-btn")) {
-                const removed = this.manager.removeExpense(id)
-                if (removed) this.render(this.manager.expenses)
+    initEvents() {
+        this.listElement.addEventListener("click", (e) => {
+            const card = e.target.closest(".transaction-card")
+            if (!card) return
+
+            const id = card.dataset.id
+            const expense = this.manager.expenses.find(e => e.id === id)
+
+            if (e.target.classList.contains("delete-btn")) {
+                this.manager.removeExpense(id)
             }
 
-            if (event.target.classList.contains("edit-btn")) {
-                const expense = this.manager.expenses.find(e => e.id === id)
-                if (expense && this.onEditExpense) {
-                    this.onEditExpense(expense)
-                }
+            if (e.target.classList.contains("edit-btn")) {
+                this.onEditExpense(expense)
             }
         })
+
     }
 
     render(expenses) {

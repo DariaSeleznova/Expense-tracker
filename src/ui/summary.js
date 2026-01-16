@@ -89,10 +89,24 @@ function renderTopExpenses(expenses, selector = "#top-expenses") {
         row.className = "top-expense"
 
         row.innerHTML = `
-            <span>${Language.t(item.category)}</span>
-            <span>${item.percent.toFixed(1)}%</span>
-            <span>${item.amount.toFixed(2)} ${Currency.getSymbol()}</span>
-        `
+     <div class="top-bar">
+        <div 
+            class="top-bar-fill"
+            data-category="${item.category}"
+            style="width: ${item.percent}%;background: ${CategoryColors.get(item.category)};"
+        ></div>
+      </div>
+
+      <div class="top-row">
+        <span class="top-category">
+            ${Language.t(item.category)}
+        </span>
+
+        <span class="top-amount">
+            ${item.amount.toFixed(2)} ${Currency.getSymbol()}
+        </span>
+      </div>
+`
 
         container.appendChild(row)
     })

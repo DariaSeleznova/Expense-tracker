@@ -4,28 +4,51 @@ class BalanceView {
         this.expenseManager = expenseManager
 
         this.amountEl = document.querySelector("#balance-amount")
-        this.showBtn = document.querySelector("#show-topup-btn")
-        this.panel = document.querySelector("#topup-panel")
-        this.input = document.querySelector("#topup-input")
-        this.addBtn = document.querySelector("#topup-btn")
+
+        this.openBtn = document.querySelector("#show-topup-btn")
+        this.modal = document.querySelector("#balance-modal-overlay")
+        this.closeBtn = this.modal.querySelector(".modal-close")
+
+        this.input = document.querySelector("#balance-input")
+        this.submitBtn = document.querySelector("#balance-submit")
     }
 
     initEvents() {
-        this.showBtn.addEventListener("click", () => {
-            this.panel.classList.toggle("hidden")
-            this.input.focus()
+        this.openBtn.addEventListener("click", () => this.open())
+        this.closeBtn.addEventListener("click", () => this.close())
+
+        this.modal.addEventListener("click", (e) => {
+            if (e.target === this.modal) this.close()
         })
 
-        this.addBtn.addEventListener("click", () => {
-            const value = Number(this.input.value)
-            if (!value || value <= 0) return
-
-            this.balanceManager.addTopUp(value)
-            this.render()
-
-            this.input.value = ""
-            this.panel.classList.add("hidden")
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") this.close()
         })
+
+        this.submitBtn.addEventListener("click", () => this.handleSubmit())
+        this.submitBtn.addEventListener("click", () => {
+            console.log("TOPUP CLICKED")
+        })
+
+    }
+
+    open() {
+        this.modal.classList.remove("hidden")
+        this.input.focus()
+    }
+
+    close() {
+        this.modal.classList.add("hidden")
+        this.input.value = ""
+    }
+
+    handleSubmit() {
+        const value = Number(this.input.value)
+        if (!value || value <= 0) return
+
+        this.balanceManager.addTopUp(value)
+        this.render()
+        this.close()
     }
 
     render() {
@@ -33,7 +56,10 @@ class BalanceView {
             this.balanceManager,
             this.expenseManager.expenses
         )
-
         this.amountEl.textContent = balance.toFixed(2)
     }
 }
+console.log("BALANCE VIEW INIT")
+console.log("input:", this.input)
+console.log("button:", this.submitBtn)
+
