@@ -85,64 +85,68 @@
 
         </div>
         <section class="content">
-
-            <section class="transactions">
-                <h3 data-language="recent"></h3>
-                <div class="filters">
-                    <form>
-                        <select id="month-select">
-                            <option value="0" data-language="january">January</option>
-                            <option value="1" data-language="february">February</option>
-                            <option value="2" data-language="march">March</option>
-                            <option value="3" data-language="april">April</option>
-                            <option value="4" data-language="may">May</option>
-                            <option value="5" data-language="june">June</option>
-                            <option value="6" data-language="july">July</option>
-                            <option value="7" data-language="august">August</option>
-                            <option value="8" data-language="september">September</option>
-                            <option value="9" data-language="october">October</option>
-                            <option value="10" data-language="november">November</option>
-                            <option value="11" data-language="december">December</option>
-                        </select>
-                        <select id="year-select">
-                            <option value="2026">2026</option>
-                            <option value="2027">2027</option>
-                            <option value="2028">2028</option>
-                        </select><select name="category" id="category-filter" data-language="category">
-                            <option value="all" data-language="all"></option>
-                            <option value="foodstuffs" data-language="foodstuffs"></option>
-                            <option value="transport" data-language="transport"></option>
-                            <option value="cosmetics" data-language="cosmetics"></option>
-                            <option value="subscriptions" data-language="subscriptions"></option>
-                            <option value="loans" data-language="loans"></option>
-                            <option value="entertainment" data-language="entertainment"></option>
-                            <option value="gifts" data-language="gifts"></option>
-                            <option value="clothing" data-language="clothing"></option>
-                            <option value="renovation" data-language="renovation"></option>
-                            <option value="other" data-language="other"></option>
-                        </select>
-                    </form>
-                </div>
-                <ul id="expense-list"></ul>
-            </section>
-
+            <div class="filters">
+                <button id="weekBtn" data-language="week"></button>
+                <select id="sort-select">
+                    <option value="none" data-language="sorting"></option>
+                    <option value="amount-asc" data-language="amount"> ↑</option>
+                    <option value="amount-desc" data-language="amount"> ↓</option>
+                </select>
+                <form>
+                    <select id="month-select">
+                        <option value="0" data-language="january">January</option>
+                        <option value="1" data-language="february">February</option>
+                        <option value="2" data-language="march">March</option>
+                        <option value="3" data-language="april">April</option>
+                        <option value="4" data-language="may">May</option>
+                        <option value="5" data-language="june">June</option>
+                        <option value="6" data-language="july">July</option>
+                        <option value="7" data-language="august">August</option>
+                        <option value="8" data-language="september">September</option>
+                        <option value="9" data-language="october">October</option>
+                        <option value="10" data-language="november">November</option>
+                        <option value="11" data-language="december">December</option>
+                    </select>
+                    <select id="year-select">
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                    </select>
+                    <select name="category" id="category-filter" data-language="category">
+                        <option value="all" data-language="all"></option>
+                        <option value="foodstuffs" data-language="foodstuffs"></option>
+                        <option value="transport" data-language="transport"></option>
+                        <option value="cosmetics" data-language="cosmetics"></option>
+                        <option value="subscriptions" data-language="subscriptions"></option>
+                        <option value="loans" data-language="loans"></option>
+                        <option value="entertainment" data-language="entertainment"></option>
+                        <option value="gifts" data-language="gifts"></option>
+                        <option value="clothing" data-language="clothing"></option>
+                        <option value="renovation" data-language="renovation"></option>
+                        <option value="other" data-language="other"></option>
+                    </select>
+                </form>
+            </div>
             <section class="analytics">
                 <h3 data-language="topExpenses"></h3>
-                <div id="top-categories"></div>
+                <div id="top-expenses"></div>
             </section>
+            <section class="transactions">
+                <h3 data-language="recent"></h3>
+                <ul id="expense-list"></ul>
+
+            </section>
+
+
 
         </section>
     </div>
 
 
-    <button id="weekBtn" data-language="week"></button>
 
 
-    <select id="sort-select">
-        <option value="none" data-language="sorting"></option>
-        <option value="amount-asc" data-language="amount"> ↑</option>
-        <option value="amount-desc" data-language="amount"> ↓</option>
-    </select>
+
+
 
     <div id="category-percent">
 

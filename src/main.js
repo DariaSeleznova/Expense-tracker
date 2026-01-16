@@ -43,14 +43,13 @@ themeSelect.addEventListener("change", () => {
 langSelect.addEventListener("change", () => {
     Language.set(langSelect.value)
     renderExpenses(manager.expenses, initialWeek)
-    renderCategoryPercent(expenses)
+    renderCategoryPercent(manager.expenses)
 })
 
 currencySelect.addEventListener("change", () => {
     Currency.set(currencySelect.value)
 
-    renderExpenses(manager.expenses, initialWeek)
-    renderBalance(balanceManager, manager.expenses)
+    renderApp()
 })
 
 
@@ -111,6 +110,10 @@ const weekExpenses = Filters.apply(manager.expenses, initialWeek)
 renderExpenses(Filters.apply(manager.expenses, initialWeek))
 renderBalance(balanceManager, manager.expenses)
 
+function renderApp() {
+    renderExpenses(manager.expenses)
+    renderBalance(balanceManager, manager.expenses)
+}
 
 function renderExpenses(expenses) {
     currentExpenses = expenses
@@ -121,6 +124,7 @@ function renderExpenses(expenses) {
     totalElement.textContent = `${total.toFixed(2)} ${Currency.getSymbol()}`
 
     renderCategoryPercent(expenses)
+    renderTopExpenses(expenses)
 }
 
 function applyMonthCategoryFilter() {

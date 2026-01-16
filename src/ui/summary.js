@@ -51,3 +51,49 @@ function renderBalance(balanceManager, expenses) {
     el.textContent = `${currentBalace.toFixed(2)} ${Currency.getSymbol()}`
 }
 
+function getTopCategories(expenses, limit = 5) {
+    if (!Array.isArray(expenses) || expenses.length === 0) return []
+
+    const totals = {}
+
+    expenses.forEach(e => {
+        totals[e.category] = (totals[e.category] || 0) + e.amount
+    })
+
+    const totalSum = getTotal(expenses)
+
+    return Object.entries(totals)
+        .map(([category, amount]) => ({
+            category,
+            amount,
+            percent: totalSum ? (amount / totalSum) * 100 : 0
+        }))
+        .sort((a, b) => b.amount - a.amount)
+        .slice(0, limit)
+}
+
+function renderTopExpenses(expenses, selector = "#top-expenses") {
+
+    const container = document.querySelector(selector)
+
+    if (!container) return
+
+    const top = getTopCategories(expenses)
+
+
+    container.innerHTML = ""
+
+    top.forEach(item => {
+
+        const row = document.createElement("div")
+        row.className = "top-expense"
+
+        row.innerHTML = `
+            <span>${Language.t(item.category)}</span>
+            <span>${item.percent.toFixed(1)}%</span>
+            <span>${item.amount.toFixed(2)} ${Currency.getSymbol()}</span>
+        `
+
+        container.appendChild(row)
+    })
+}

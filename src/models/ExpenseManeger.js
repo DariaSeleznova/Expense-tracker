@@ -21,8 +21,7 @@ class ExpenseManager {
         this.expenses.push(expense)
 
         this.save()
-        renderExpenses(manager.expenses)
-        renderBalance(balanceManager, manager.expenses)
+        renderApp()
         return expense
     }
     removeExpense(id) {
@@ -35,8 +34,7 @@ class ExpenseManager {
         }
 
         this.save()
-        renderExpenses(manager.expenses)
-        renderBalance(balanceManager, manager.expenses)
+        renderApp()
         return true
     }
     getTotalAllTime() {
@@ -65,8 +63,7 @@ class ExpenseManager {
         expense.date = date
 
         this.save()
-        renderExpenses(manager.expenses)
-        renderBalance(balanceManager, manager.expenses)
+        renderApp()
         return expense
     }
 

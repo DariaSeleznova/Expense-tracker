@@ -37,9 +37,7 @@ class ExpenseForm {
                 this.manager.addExpense({ category, amount, comments, date })
             }
 
-            this.listUI.render(this.manager.expenses)
-            renderTotal(this.manager.expenses)
-            renderCategoryPercent(this.manager.expenses)
+            renderApp()
             this.form.reset()
             this.container.classList.add("hidden")
         })
