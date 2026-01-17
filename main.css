@@ -1,30 +1,50 @@
+@font-face {
+    font-family: Kurale;
+    src: url(./Kurale/Kurale-Regular.ttf);
+}
+
 :root {
-    --bg: #ffffff;
+    --bg: url(./src/assets/backgrounds/daySky.jpg);
     --text: #1f2937;
     --card: #f3f4f6;
-    --accent: #6366f1;
+    --accent: #22b8f9;
     --border: #e5e7eb;
 }
 
 body.theme-dark {
-    --bg: #111827;
-    --text: #e5e7eb;
-    --card: #1f2937;
-    --accent: #818cf8;
+    --bg: linear-gradient(rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.6)),
+        url(./src/assets/backgrounds/night-sky.jpg);
+
+    --text: #863594;
+    --card: #040912;
+    --accent: #863594;
     --border: #374151;
 }
 
 body.theme-rainbow {
-    --bg: linear-gradient(135deg, #fdf2f8, #ecfeff);
-    --text: #1f2937;
-    --card: rgba(255, 255, 255, 0.7);
-    --accent: #ec4899;
-    --border: #fbcfe8;
+    --bg: url(./src/assets/backgrounds/rainbow.jpg);
+    --text: #0127c7;
+    --card: #7feedfb3;
+    --accent: #fc77fd;
+    --border: #cff1fb;
 }
 
 body {
     background: var(--bg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     color: var(--text);
+    font-family: Kurale;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+h3 {
+    font-size: 30px;
 }
 
 .card,
@@ -36,12 +56,18 @@ body {
     padding: 12px;
 }
 
-button {
+select {
+    appearance: none;
+}
+
+button,
+select {
     background: var(--accent);
-    color: white;
+    color: #070d19;
     border: none;
     border-radius: 8px;
     padding: 6px 12px;
+    font-family: Kurale;
 }
 
 * {
@@ -52,8 +78,6 @@ button {
 button:hover {
     transform: translateY(-1px);
 }
-
-
 
 
 .app {
@@ -67,6 +91,7 @@ button:hover {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 }
 
 .dashboard {
@@ -79,7 +104,10 @@ button:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
+    margin: 25px auto;
+    justify-content: center;
     align-items: center;
+
 }
 
 .content {
@@ -97,7 +125,24 @@ button:hover {
     border-bottom: 1px solid var(--border);
 }
 
+.balance-card,
+.expense-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#show-topup-btn,
+#show-form-btn {
+    margin: 20px;
+    width: 50%;
+}
+
 /*modal*/
+.hidden {
+    display: none !important;
+}
 
 #balance-modal-overlay.hidden,
 #modal-overlay.hidden {
@@ -144,6 +189,44 @@ button:hover {
 .modal select,
 .modal button {
     width: 100%;
+}
+
+.donut {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: #e5e7eb;
+    position: relative;
+    margin: 0 auto;
+}
+
+/* дырка внутри */
+.donut::after {
+    content: "";
+    position: absolute;
+    inset: 99%;
+    background: var(--card);
+    border-radius: 50%;
+}
+
+.legend {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    font-size: 14px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
 }
 
 /*card expenses*/
@@ -209,7 +292,7 @@ button:hover {
 
 /* полоска */
 .top-bar {
-    height: 6px;
+    height: 10px;
     background: var(--border);
     border-radius: 4px;
     overflow: hidden;
@@ -230,11 +313,12 @@ button:hover {
 }
 
 .top-category {
-    opacity: 0.85;
+    font-weight: 700;
+    opacity: 0.7 5;
 }
 
 .top-amount {
-    font-weight: 500;
+    font-weight: 800;
 }
 
 

@@ -8,13 +8,13 @@ class BalanceView {
         this.openBtn = document.querySelector("#show-topup-btn")
         this.modal = document.querySelector("#balance-modal-overlay")
         this.closeBtn = this.modal.querySelector(".modal-close")
-
         this.input = document.querySelector("#balance-input")
         this.submitBtn = document.querySelector("#balance-submit")
     }
 
     initEvents() {
         this.openBtn.addEventListener("click", () => this.open())
+
         this.closeBtn.addEventListener("click", () => this.close())
 
         this.modal.addEventListener("click", (e) => {
@@ -26,9 +26,7 @@ class BalanceView {
         })
 
         this.submitBtn.addEventListener("click", () => this.handleSubmit())
-        this.submitBtn.addEventListener("click", () => {
-            console.log("TOPUP CLICKED")
-        })
+
 
     }
 
@@ -59,7 +57,5 @@ class BalanceView {
         this.amountEl.textContent = balance.toFixed(2)
     }
 }
-console.log("BALANCE VIEW INIT")
-console.log("input:", this.input)
-console.log("button:", this.submitBtn)
+
 

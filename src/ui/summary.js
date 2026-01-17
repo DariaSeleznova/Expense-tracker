@@ -51,7 +51,7 @@ function renderBalance(balanceManager, expenses) {
     el.textContent = `${currentBalace.toFixed(2)} ${Currency.getSymbol()}`
 }
 
-function getTopCategories(expenses, limit = 5) {
+function getTopCategories(expenses) {
     if (!Array.isArray(expenses) || expenses.length === 0) return []
 
     const totals = {}
@@ -69,7 +69,6 @@ function getTopCategories(expenses, limit = 5) {
             percent: totalSum ? (amount / totalSum) * 100 : 0
         }))
         .sort((a, b) => b.amount - a.amount)
-        .slice(0, limit)
 }
 
 function renderTopExpenses(expenses, selector = "#top-expenses") {
@@ -99,7 +98,7 @@ function renderTopExpenses(expenses, selector = "#top-expenses") {
 
       <div class="top-row">
         <span class="top-category">
-            ${Language.t(item.category)}
+            ${Language.t(item.category)} ${item.percent.toFixed(1)}%
         </span>
 
         <span class="top-amount">
@@ -110,4 +109,47 @@ function renderTopExpenses(expenses, selector = "#top-expenses") {
 
         container.appendChild(row)
     })
+}
+function renderCategoryChart(expenses) {
+    const container = document.querySelector("#category-percent")
+    if (!container) return
+
+    const data = getTopCategories(expenses)
+    if (!data.length) {
+        container.innerHTML = "<p>No data</p>"
+        return
+    }
+
+    let currentAngle = 0
+    const parts = []
+
+    data.forEach(item => {
+        const start = currentAngle
+        const end = currentAngle + item.percent
+        currentAngle = end
+
+        parts.push(
+            `${CategoryColors.get(item.category)} ${start}% ${end}%`
+        )
+    })
+    const legend = data.map(item => `
+    <div class="legend-item">
+        <span 
+            class="legend-dot"
+            style="background:${CategoryColors.get(item.category)}"
+        ></span>
+        <span>${Language.t(item.category)}</span>
+    </div>
+`).join("")
+
+
+    container.innerHTML = `
+    <div class="donut"
+        style="background: conic-gradient(${parts.join(",")})"
+    ></div>
+    <div class="legend">
+        ${legend}
+    </div>
+`
+
 }

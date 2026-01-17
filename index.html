@@ -17,9 +17,9 @@
             <h1>Expense Tracker</h1>
             <div class="settings">
                 <select id="theme-select">
-                    <option value="light">☀️ Light</option>
-                    <option value="dark">🌙 Dark</option>
-                    <option value="rainbow">🌈 Rainbow</option>
+                    <option value="light">☀️</option>
+                    <option value="dark">🌙</option>
+                    <option value="rainbow">🌈</option>
                 </select>
                 <select name="language" id="language-select">
                     <option value="pl">PL</option>
@@ -43,7 +43,7 @@
                         <span id="balance-amount">0</span>
                     </p>
 
-                    <button id="show-topup-btn">＋</button>
+                    <button id="show-topup-btn" data-language="topup"></button>
 
                     <div id="topup-panel" class="hidden">
                         <input type="number" id="topup-input" />
@@ -59,7 +59,10 @@
                 </article>
 
                 <article class="card chart-card">
-                    <div id="category-percent"></div>
+                    <div id="category-percent">
+                        <div id="donut"></div>
+                    </div>
+
                 </article>
             </section>
             <section class="filters">
@@ -146,10 +149,9 @@
                 <button class="modal-close">✕</button>
 
                 <h3 data-language="topup"></h3>
-
                 <input type="number" id="balance-input" placeholder="Amount" step="0.01" />
-
                 <button id="balance-submit" data-language="topup"></button>
+
             </div>
         </div>
 
