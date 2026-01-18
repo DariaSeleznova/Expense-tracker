@@ -43,14 +43,13 @@ The application is fully responsive and optimized for:
 ---
 
 ## 📊 Project Structure
-
-```text
+```
 src/
 ├── models        # Business logic and data models
 ├── ui            # UI components and rendering logic
 ├── settings      # Language, theme and currency management
 ├── utils         # Helpers and storage utilities
-
+```
 How to Run Locally
 
 1.Clone the repository:
@@ -93,31 +92,31 @@ Frontend Developer
 ## 📸 Screenshots
 
 ### Dashboard
-![Dashboard](screenshots/dashboard-desktop.png)
+![Dashboard](src/assets/screenshots/dashboard-desktop.png)
 
 ### Add / Edit Expense
-![Add Expense](screenshots/add-expense-modal.png)
+![Add Expense](src/assets/screenshots/add-expense-modal.png)
 
 ### Monthly Filter
-![Monthly Filter](screenshots/monthly-filter.png)
+![Monthly Filter](src/assets/screenshots/monthly-filter.png)
 
 ### Mobile View Top
-![Mobile View Top](screenshots/mobile-view-top.png)
+![Mobile View Top](src/assets/screenshots/mobile-view-top.png)
 
-### Mobile View Bottom
-![Mobile View Bottom](screenshots/mobile-view-bootom.png)
+### Mobile View Botton
+![Mobile View Botton](src/assets/screenshots/mobile-view-botton.png)
 
 ### Select Language
-![Select Language](sreenshorts/select-language.png)
+![Select Language](src/assets/screenshots/select-language.png)
 
 ### Select Currency
-![Select Currency](sreenshorts/select-currency.png)
+![Select Currency](src/assets/screenshots/select-currency.png)
 
 ### Select Theme
-![Select Theme](sreenshorts/select-theme.png)
+![Select Theme](src/assets/screenshots/select-theme.png)
 
 ### Dashboard Dark Theme
-![Dashboard Dark Theme](sreenshots/dashboard-dark-theme.png)
+![Dashboard Dark Theme](src/assets/screenshots/dashboard-dark-theme.png)
 
 ### Dashboard Rainbow Theme
-![Dashboard Rainbow Theme](sreenshots/dashboard-rainbow-theme.png)
+![Dashboard Rainbow Theme](src/assets/screenshots/dashboard-rainbow-theme.png)
