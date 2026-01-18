@@ -42,16 +42,7 @@ The application is fully responsive and optimized for:
 
 ---
 
-## 📊 Project Structure
-
-```text
-src/
-├── models        # Business logic and data models
-├── ui            # UI components and rendering logic
-├── settings      # Language, theme and currency management
-├── utils         # Helpers and storage utilities
-
-How to Run Locally
+🚀 How to Run Locally
 
 1.Clone the repository:
 
