@@ -84,7 +84,7 @@ Frontend Developer
 ## 📸 Screenshots
 
 ### Dashboard
-![Dashboard](screenshots/dashboard-desktop.png)
+![Dashboard](src/assets/screenshots/dashboard-desktop.png)
 
 ### Add / Edit Expense
 ![Add Expense](screenshots/add-expense-modal.png)
