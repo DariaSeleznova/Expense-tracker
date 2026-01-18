@@ -89,3 +89,35 @@ Export data (CSV / PDF)
 
 Created by Daria Seleznova
 Frontend Developer
+
+## 📸 Screenshots
+
+### Dashboard
+![Dashboard](screenshots/dashboard-desktop.png)
+
+### Add / Edit Expense
+![Add Expense](screenshots/add-expense-modal.png)
+
+### Monthly Filter
+![Monthly Filter](screenshots/monthly-filter.png)
+
+### Mobile View Top
+![Mobile View Top](screenshots/mobile-view-top.png)
+
+### Mobile View Bottom
+![Mobile View Bottom](screenshots/mobile-view-bootom.png)
+
+### Select Language
+![Select Language](sreenshorts/select-language.png)
+
+### Select Currency
+![Select Currency](sreenshorts/select-currency.png)
+
+### Select Theme
+![Select Theme](sreenshorts/select-theme.png)
+
+### Dashboard Dark Theme
+![Dashboard Dark Theme](sreenshots/dashboard-dark-theme.png)
+
+### Dashboard Rainbow Theme
+![Dashboard Rainbow Theme](sreenshots/dashboard-rainbow-theme.png)
