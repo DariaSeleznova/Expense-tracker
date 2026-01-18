@@ -4,15 +4,20 @@ const Filters = {
     week() {
         const now = new Date()
         const start = new Date(now)
-        start.setDate(now.getDate() - now.getDay() + 1) // понедельник
+
+        const day = now.getDay()
+        const diff = day === 0 ? -6 : 1 - day
+
+        start.setDate(now.getDate() + diff)
         start.setHours(0, 0, 0, 0)
 
         const end = new Date(start)
-        end.setDate(start.getDate() + 6) // воскресенье
+        end.setDate(start.getDate() + 6)
         end.setHours(23, 59, 59, 999)
 
         return { start, end }
     },
+
 
     byMonth(year, month) {
         const start = new Date(year, month, 1)

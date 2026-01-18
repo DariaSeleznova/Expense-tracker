@@ -52,28 +52,35 @@ class ExpenseForm {
     handleSubmit() {
         const formData = new FormData(this.form)
 
-        const expense = this.manager.addExpense({
+        const data = {
             category: formData.get("category"),
             amount: Number(formData.get("amount")),
             comments: formData.get("comments"),
             date: this.datePicker.selectedDates[0] || new Date()
-        })
-
-        if (expense) {
-            this.close()
         }
+
+        const editId = this.form.dataset.editId
+
+        if (editId) {
+            this.manager.updateExpense(editId, data)
+            delete this.form.dataset.editId
+        } else {
+            this.manager.addExpense(data)
+        }
+
+        this.close()
+        renderByMode()
     }
 
 
+
     openForEdit(expense) {
-        console.log("openForEdit CALLED", this.modal)
         this.form.dataset.editId = expense.id
         this.form.querySelector('select[name="category"]').value = expense.category
         this.form.querySelector('input[name="amount"]').value = expense.amount
         this.form.querySelector('input[name="comments"]').value = expense.comments
         this.datePicker.setDate(expense.date, true)
         this.modal.classList.remove("hidden")
-        console.log(this instanceof ExpenseForm)
 
     }
 

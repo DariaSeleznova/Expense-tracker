@@ -21,7 +21,7 @@ class ExpenseManager {
         this.expenses.push(expense)
 
         this.save()
-        renderApp()
+        renderByMode()
         return expense
     }
     removeExpense(id) {
@@ -34,7 +34,7 @@ class ExpenseManager {
         }
 
         this.save()
-        renderApp()
+        renderByMode()
         return true
     }
     getTotalAllTime() {
@@ -46,6 +46,11 @@ class ExpenseManager {
     save() {
         Storage.save("expenses", this.expenses)
     }
+    load(key) {
+        const data = localStorage.getItem(key)
+        return data ? JSON.parse(data) : []
+    }
+
     getExpensesByMonth(year, month) {
         return this.expenses.filter(e =>
             e.date.getFullYear() === year &&
@@ -63,7 +68,7 @@ class ExpenseManager {
         expense.date = date
 
         this.save()
-        renderApp()
+        renderByMode()
         return expense
     }
 

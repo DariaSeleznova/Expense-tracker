@@ -47,7 +47,7 @@ langSelect.addEventListener("change", () => {
 currencySelect.addEventListener("change", () => {
     Currency.set(currencySelect.value)
 
-    renderApp()
+    renderByMode()
 })
 
 
@@ -64,6 +64,11 @@ weekBtn.addEventListener("click", () => {
 })
 
 monthSelect.addEventListener("change", () => {
+    if (monthSelect.value === "") {
+        Filters.mode = "week"
+        renderByMode()
+        return
+    }
     Filters.mode = "month"
     applyMonthCategoryFilter()
 })
@@ -101,18 +106,12 @@ sortSelect.addEventListener("change", () => {
 
     renderExpenses(expensesToRender)
 })
-
-const initialWeek = Filters.week()
-const weekExpenses = Filters.apply(manager.expenses, initialWeek)
-
-renderExpenses(Filters.apply(manager.expenses, initialWeek))
-renderBalance(balanceManager, manager.expenses)
-
-function renderApp() {
-    renderExpenses(manager.expenses)
-    renderBalance(balanceManager, manager.expenses)
-
+function initApp() {
+    Filters.mode = "week"
+    renderByMode()
 }
+
+initApp()
 
 function renderExpenses(expenses) {
     currentExpenses = expenses
@@ -126,22 +125,41 @@ function renderExpenses(expenses) {
     renderCategoryChart(expenses)
     renderTopExpenses(expenses)
 }
+function renderByMode() {
+    if (Filters.mode === "week") {
+        const range = Filters.week()
+        const weekExpenses = Filters.apply(manager.expenses, range)
+        renderExpenses(weekExpenses)
+    }
+    else if (Filters.mode === "month") {
+        applyMonthCategoryFilter()
+    }
+    else {
+        renderExpenses(manager.expenses)
+    }
+
+    renderBalance(balanceManager, manager.expenses)
+}
+
 
 function applyMonthCategoryFilter() {
     const year = Number(yearSelect.value)
-    const month = Number(monthSelect.value)
+    const monthValue = monthSelect.value
     const category = categoryFilter.value
 
-    if (!isNaN(year) && !isNaN(month)) {
-        let filtered = manager.getExpensesByMonth(year, month)
+    if (monthValue === "") return
 
-        if (category !== "all") {
-            filtered = filtered.filter(e => e.category === category)
-        }
+    const month = Number(monthValue)
 
-        renderExpenses(filtered)
+    let filtered = manager.getExpensesByMonth(year, month)
+
+    if (category !== "all") {
+        filtered = filtered.filter(e => e.category === category)
     }
+
+    renderExpenses(filtered)
 }
+
 
 function renderBalance(balanceManager, expenses) {
     const el = document.querySelector("#balance-amount")

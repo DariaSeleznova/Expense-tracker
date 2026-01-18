@@ -1,14 +1,22 @@
+/* ===============================
+   FONT
+=============================== */
 @font-face {
     font-family: Kurale;
     src: url(./Kurale/Kurale-Regular.ttf);
 }
 
+
+/* ===============================
+   CSS VARIABLES / THEMES
+=============================== */
 :root {
     --bg: url(./src/assets/backgrounds/daySky.jpg);
     --text: #1f2937;
-    --card: #f3f4f6;
+    --card: #d5def1;
     --accent: #22b8f9;
-    --border: #e5e7eb;
+    --border: #bbcdf0;
+    --modal-overlay: rgba(0, 0, 0, 0.5);
 }
 
 body.theme-dark {
@@ -16,20 +24,26 @@ body.theme-dark {
             rgba(0, 0, 0, 0.6)),
         url(./src/assets/backgrounds/night-sky.jpg);
 
-    --text: #863594;
+    --text: #b984c2;
     --card: #040912;
-    --accent: #863594;
-    --border: #374151;
+    --accent: #b984c2;
+    --border: #686c74;
+    --modal-overlay: rgba(118, 118, 118, 0.5);
 }
 
 body.theme-rainbow {
     --bg: url(./src/assets/backgrounds/rainbow.jpg);
-    --text: #0127c7;
+    --text: #3c5ad1;
     --card: #7feedfb3;
-    --accent: #fc77fd;
+    --accent: #f999f9;
     --border: #cff1fb;
+    --modal-overlay: rgba(174, 253, 241, 0.5);
 }
 
+
+/* ===============================
+   BASE STYLES
+=============================== */
 body {
     background: var(--bg);
     background-size: cover;
@@ -47,6 +61,10 @@ h3 {
     font-size: 30px;
 }
 
+
+/* ===============================
+   COMMON UI ELEMENTS
+=============================== */
 .card,
 #balance,
 #total-expenses {
@@ -54,10 +72,6 @@ h3 {
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 12px;
-}
-
-select {
-    appearance: none;
 }
 
 button,
@@ -70,9 +84,8 @@ select {
     font-family: Kurale;
 }
 
-* {
-    transition:
-        background 0.3s ease, color 0.3 ease;
+select {
+    appearance: none;
 }
 
 button:hover {
@@ -80,6 +93,9 @@ button:hover {
 }
 
 
+/* ===============================
+   LAYOUT
+=============================== */
 .app {
     display: grid;
     grid-template-rows: auto auto 1fr;
@@ -89,7 +105,6 @@ button:hover {
 
 .header {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
@@ -100,6 +115,12 @@ button:hover {
     gap: 24px;
 }
 
+.content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+}
+
 .filters {
     display: flex;
     flex-wrap: wrap;
@@ -107,24 +128,12 @@ button:hover {
     margin: 25px auto;
     justify-content: center;
     align-items: center;
-
-}
-
-.content {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 24px;
 }
 
 
-.expense-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-}
-
+/* ===============================
+   DASHBOARD CARDS
+=============================== */
 .balance-card,
 .expense-card {
     display: flex;
@@ -139,7 +148,10 @@ button:hover {
     width: 50%;
 }
 
-/*modal*/
+
+/* ===============================
+   MODALS
+=============================== */
 .hidden {
     display: none !important;
 }
@@ -153,27 +165,29 @@ button:hover {
 #modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--modal-overlay);
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
 
 .modal {
     position: relative;
     background: white;
-    padding: 24px;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* close button */
 .modal-close {
+    width: 20%;
     position: absolute;
-
+    background: var(--accent);
+    border: none;
     top: 12px;
     right: 12px;
-    background: transparent;
-    color: var(--text);
     font-size: 18px;
     cursor: pointer;
 }
@@ -181,16 +195,38 @@ button:hover {
 .modal form {
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding-top: 48px;
     gap: 12px;
 }
 
 .modal input,
-.modal select,
-.modal button {
+.modal select {
     width: 100%;
+    background: var(--accent);
+    color: #070d19;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-family: Kurale;
 }
 
+#balance-input {
+    margin-bottom: 20px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+
+
+/* ===============================
+   DONUT CHART (CATEGORY PERCENT)
+=============================== */
 .donut {
     width: 180px;
     height: 180px;
@@ -198,13 +234,13 @@ button:hover {
     background: #e5e7eb;
     position: relative;
     margin: 0 auto;
+    transition: background 0.6s ease;
 }
 
-/* дырка внутри */
 .donut::after {
     content: "";
     position: absolute;
-    inset: 99%;
+    inset: 40%;
     background: var(--card);
     border-radius: 50%;
 }
@@ -229,7 +265,10 @@ button:hover {
     border-radius: 50%;
 }
 
-/*card expenses*/
+
+/* ===============================
+   TRANSACTIONS LIST
+=============================== */
 .transaction-card {
     background: var(--card);
     border-radius: 14px;
@@ -237,6 +276,7 @@ button:hover {
     margin-bottom: 12px;
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+
 }
 
 .transaction-card:hover {
@@ -281,47 +321,10 @@ button:hover {
     opacity: 0.7;
 }
 
-/*top expenses*/
 
-.top-expense {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 14px;
-}
-
-/* полоска */
-.top-bar {
-    height: 10px;
-    background: var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.top-bar-fill {
-    height: 100%;
-    background: var(--accent);
-    border-radius: 4px;
-    transition: width 0.4s ease;
-}
-
-/* строка под полоской */
-.top-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-}
-
-.top-category {
-    font-weight: 700;
-    opacity: 0.7 5;
-}
-
-.top-amount {
-    font-weight: 800;
-}
-
-
+/* ===============================
+   CATEGORY COLOR DOT
+=============================== */
 .expense-category {
     display: flex;
     align-items: center;
@@ -340,8 +343,48 @@ button:hover {
 }
 
 
+/* ===============================
+   TOP EXPENSES
+=============================== */
+.top-expense {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+}
 
-/* animation */
+.top-bar {
+    height: 10px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.top-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 4px;
+    transition: width 0.4s ease, opacity 0.3s ease;
+}
+
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.top-category {
+    font-weight: 700;
+}
+
+.top-amount {
+    font-weight: 800;
+}
+
+
+/* ===============================
+   ANIMATIONS
+=============================== */
 @keyframes scaleIn {
     from {
         opacity: 0;
@@ -353,7 +396,6 @@ button:hover {
         transform: scale(1);
     }
 }
-
 
 @keyframes fadeIn {
     from {
@@ -368,12 +410,65 @@ button:hover {
 }
 
 
-@media (max-width: 900px) {
+/* ===============================
+   RESPONSIVE
+=============================== */
+@media (max-width: 1024px) {
+    .dashboard {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .chart-card {
+        grid-column: 1 / -1;
+    }
+
+    #category-percent {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: row-reverse;
+    }
+
+    .legend {
+        width: 50%;
+    }
+}
+
+
+@media (max-width: 600px) {
     .dashboard {
         grid-template-columns: 1fr;
     }
 
     .content {
         grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 35px;
+    }
+
+    h3 {
+        font-size: 25px;
+    }
+
+    .header {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
+
+    .filters {
+        justify-content: space-evenly;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #month-select,
+    #year-select,
+    #category-filter {
+        margin: 5px;
     }
 }
