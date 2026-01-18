@@ -1,12 +1,3 @@
-// Работа с localStorage:
-
-// saveExpenses()
-
-// loadExpenses()
-
-// 👉 Это очень любят — отдельный слой для хранения данных.
-
-// Создаём глобальный объект Storage
 const Storage = {
     save: function (key, data) {
         localStorage.setItem(key, JSON.stringify(data))

@@ -1,5 +1,5 @@
 const Filters = {
-    mode: "week", // week | month
+    mode: "week",
 
     week() {
         const now = new Date()
